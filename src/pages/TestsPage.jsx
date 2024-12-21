@@ -11,6 +11,7 @@ import { getCourses, getTests } from "../utils/http";
 import useGetData from "../hooks/useGetData";
 import { HiMiniPlusCircle } from "react-icons/hi2";
 import ModalAddCourse from "../components/shared/ModalAddCourse";
+import ModalAddTest from "../components/shared/ModalAddTest";
 
 const TestsPage = () => {
   const dialog = useRef();
@@ -32,9 +33,14 @@ const TestsPage = () => {
   );
   const { isLoading, error, data } = useGetData(getTests, queryParams);
 
+  if (!data) {
+    return <p>No data</p>
+  }
+  console.log(data)
+  
   return (
     <div>
-      <ModalAddCourse ref={dialog} />
+      <ModalAddTest ref={dialog} />
       <div className="mx-8 mt-4">
         <div className="flex justify-between items-center">
           <div className="mb-4 flex justify-between items-center w-full">

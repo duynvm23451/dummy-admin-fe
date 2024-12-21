@@ -7,60 +7,73 @@ import React, {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouteLoaderData } from "react-router-dom";
-import { createCourse } from "../../utils/http";
+import { createModule, createTest } from "../../utils/http";
 
-const ModalAddCourse = forwardRef(({}, ref) => {
+const ModalAddTest = forwardRef(({ }, ref) => {
   const token = useRouteLoaderData("root");
   const [isLoading, setIsLoading] = useState(false);
   const dialog = useRef();
-  useImperativeHandle(ref, () => {
-    return {
-      open() {
-        dialog.current.showModal();
-      },
-    };
-  });
+
+  useImperativeHandle(ref, () => ({
+    open() {
+      dialog.current.showModal();
+    },
+  }));
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const fd = new FormData(event.target);
     const formData = Object.fromEntries(fd.entries());
     formData.token = token;
+    formData.duration = formData.duration * 60;
+    console.log(formData);
     setIsLoading(true);
     try {
-      const data = await createCourse(formData);
+      const data = await createTest(formData);
       toast.success(data.message, {
         position: "bottom-right",
       });
       window.location.reload();
+
     } catch (error) {
-      console.log(error);
-      const errorData = error.response.data;
-      toast.error(errorData.message, {
+      console.error(error);
+      const errorData = error.response?.data;
+      toast.error(errorData?.message || "An error occurred", {
         position: "bottom-right",
       });
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
+
   return (
     <>
       <ToastContainer />
       <dialog ref={dialog} className="p-6 rounded-lg">
-        <ToastContainer />
-        <h1 className="text-xl font-bold mb-8">Thêm khóa học</h1>
+        <h1 className="text-xl font-bold mb-8">Thêm bài kiểm tra</h1>
         <form onSubmit={handleSubmit}>
           <label className="block mb-2 uppercase text-sm font-semibold">
-            Tiêu đề
+            Tên bài kiểm tra
           </label>
           <input
             className="block min-w-96 px-4 py-1.5 rounded-2xl bg-gray-100"
-            name="title"
+            name="name"
           />
-          <label className="mt-4 block mb-2 uppercase text-sm font-semibold">
-            Mô tả
+          <label className="block mt-4 mb-2 uppercase text-sm font-semibold">
+            Số câu cần để qua
           </label>
-          <textarea
+          <input
             className="block min-w-96 px-4 py-1.5 rounded-2xl bg-gray-100"
-            name="description"
+            name="min_pass_scroce"
+            type="number"
+          />
+            <label className="block mt-4 mb-2 uppercase text-sm font-semibold">
+            Số phút yêu cầu hoàn thành
+          </label>
+          <input
+            className="block min-w-96 px-4 py-1.5 rounded-2xl bg-gray-100"
+            name="duration"
+            type="number"
           />
           <label className="mt-4 block mb-2 uppercase text-sm font-semibold">
             Trình độ
@@ -78,7 +91,7 @@ const ModalAddCourse = forwardRef(({}, ref) => {
           <div className="flex items-center mt-6 justify-end">
             <button
               type="button"
-              className="text-lg font-semibold px-6 py-2 rounded-xl  hover:bg-theme-yellow hover:text-theme-white mr-4"
+              className="text-lg font-semibold px-6 py-2 rounded-xl hover:bg-theme-yellow hover:text-theme-white mr-4"
               onClick={() => dialog.current.close()}
             >
               Đóng
@@ -97,4 +110,4 @@ const ModalAddCourse = forwardRef(({}, ref) => {
   );
 });
 
-export default ModalAddCourse;
+export default ModalAddTest;

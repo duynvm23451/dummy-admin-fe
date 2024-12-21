@@ -101,7 +101,7 @@ const CoursePage = () => {
       {!error && data && (
         <div className="w-full flex justify-center mt-12">
           <Pagination
-            navigatePath="/"
+            navigatePath="/courses/"
             pagination={renderPaginationItems(
               data.current_page,
               data.last_page

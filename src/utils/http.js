@@ -45,6 +45,19 @@ export const createCourse = async (formData) => {
   return response;
 };
 
+export const createTest = async (formData) => {
+  const response = await axios.post(
+    import.meta.env.VITE_API + "tests",
+    formData,
+    {
+      headers: {
+        Authorization: "Bearer " + formData.token,
+      },
+    }
+  );
+  return response;
+};
+
 export const getCourseDetail = async (queryParams) => {
   const id = queryParams.id;
   const response = await axios.get(import.meta.env.VITE_API + "courses/" + id, {
