@@ -34,10 +34,10 @@ const TestsPage = () => {
   const { isLoading, error, data } = useGetData(getTests, queryParams);
 
   if (!data) {
-    return <p>No data</p>
+    return <p>No data</p>;
   }
-  console.log(data)
-  
+  console.log(data);
+
   return (
     <div>
       <ModalAddTest ref={dialog} />
@@ -70,6 +70,9 @@ const TestsPage = () => {
                 Trình độ
               </th>
               <th className="p-3 font-bold tracking-wide text-left uppercase text-sm">
+                Thời gian làm bài ( phút )
+              </th>
+              <th className="p-3 font-bold tracking-wide text-left uppercase text-sm">
                 Điểm đỗ
               </th>
               <th className="p-3 font-bold tracking-wide text-left uppercase text-sm">
@@ -98,6 +101,9 @@ const TestsPage = () => {
                     <span className="font-bold px-2.5 py-1.5 rounded-lg bg-theme-black text-white">
                       {el.level}
                     </span>
+                  </td>
+                  <td className="px-3 py-4 tracking-wider max-w-48 font-semibold">
+                    {el.duration / 60}
                   </td>
                   <td className="px-3 py-4 tracking-wider max-w-48 font-semibold">
                     {el.min_pass_scroce}

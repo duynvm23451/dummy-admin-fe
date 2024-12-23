@@ -6,6 +6,7 @@ import CoursePage from "../pages/CoursePage";
 import CourseDetailPage from "../pages/CourseDetailPage";
 import TestsPage from "../pages/TestsPage";
 import TestDetailPage from "../pages/TestDetailPage";
+import EnrollmentPage from "../pages/EnrollmentPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "tests/:id",
         element: <TestDetailPage />,
+      },
+      {
+        path: "enrollments",
+        element: <EnrollmentPage />,
       },
     ],
   },

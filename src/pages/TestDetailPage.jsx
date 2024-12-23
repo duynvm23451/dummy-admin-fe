@@ -65,7 +65,7 @@ const TestDetailPage = () => {
 
       <ModalAddQuestion ref={dialogAddQuestion} testId={params.id} />
       <div className="flex justify-between items-center">
-        <div className="flex w-1/2">
+        <div className="flex w-2/3">
           <div className="bg-theme-gray  p-4 rounded-xl min-w-72 mr-6">
             <h3 className="font-semibold">Tên bài kiểm tra</h3>
             <div className="mt-2 bg-theme-white p-2 rounded-lg">
@@ -76,6 +76,12 @@ const TestDetailPage = () => {
             <h3 className="font-semibold">Trình độ</h3>{" "}
             <div className="mt-2 bg-theme-white p-2 rounded-lg">
               {data.level}
+            </div>
+          </div>
+          <div className="bg-theme-gray  p-4 rounded-xl min-w-72 mr-6">
+            <h3 className="font-semibold">Thời gian làm bài ( phút )</h3>
+            <div className="mt-2 bg-theme-white p-2 rounded-lg">
+              {data.duration / 60}
             </div>
           </div>
           <div className="bg-theme-gray p-4 rounded-xl flex-grow">
