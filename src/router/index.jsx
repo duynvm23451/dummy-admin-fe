@@ -7,6 +7,7 @@ import CourseDetailPage from "../pages/CourseDetailPage";
 import TestsPage from "../pages/TestsPage";
 import TestDetailPage from "../pages/TestDetailPage";
 import EnrollmentPage from "../pages/EnrollmentPage";
+import TestAttemptsPage from "../pages/TestAttemptsPage";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "enrollments",
         element: <EnrollmentPage />,
+      },
+      {
+        path: "test-attempts",
+        element: <TestAttemptsPage />,
       },
     ],
   },
